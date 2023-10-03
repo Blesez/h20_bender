@@ -14,7 +14,8 @@ class TanksArrangement extends StatefulWidget {
 }
 
 class _TanksArrangementState extends State<TanksArrangement> {
-  MyData myData = MyData(numOfTank: 2, tankValues: List.empty(), pumpState: '');
+  MyData myData =
+      MyData(numOfTank: 2, tankValues: List.empty(), pumpState: 'off');
 
   List<TankModel> tanks = [];
   late TankModel tankModel;
@@ -88,62 +89,44 @@ class _TanksArrangementState extends State<TanksArrangement> {
                                 if (currentData.tankValues.isEmpty) {
                                   final updatedTankValues =
                                       List.filled(newIndex + 1, 0.0);
+
                                   setState(() {
-                                    myData = myData
-                                        .updateTankValues(updatedTankValues);
+                                    myData.updateTankValues(updatedTankValues);
                                   });
                                   if (kDebugMode) {
                                     print(myData.tankValues);
                                   }
-                                }
-                                if (myData.tankValues != null) {
-                                  switch (myData.tankValues.length
-                                      .compareTo(newIndex)) {
-                                    case -1:
-                                      int val =
-                                          newIndex - myData.tankValues.length;
-                                      final updatedTankValues = [
-                                        ...myData.tankValues,
-                                        ...List.filled(val, 0.0)
-                                      ];
-                                      setState(() {
-                                        myData = myData.updateTankValues(
-                                            updatedTankValues);
-                                      });
-                                      if (kDebugMode) {
-                                        print(myData.tankValues);
-                                      }
-                                      if (myData.tankValues.length ==
-                                          newIndex) {
-                                        addTank(
-                                          newIndex,
-                                          getColour(newIndex),
-                                          myData.tankValues[newIndex],
-                                        );
-                                      }
-                                      break;
-                                    case 0:
-                                      addTank(
-                                        newIndex,
-                                        getColour(newIndex),
-                                        myData.tankValues[newIndex],
-                                      );
-                                      break;
-                                    case 1:
-                                      num val =
-                                          myData.tankValues.length - newIndex;
-                                      for (var i = 0; i < val; i++) {
-                                        addTank(
-                                          newIndex,
-                                          getColour(newIndex),
-                                          myData.tankValues[newIndex],
-                                        );
-                                        newIndex++;
-                                      }
-                                      break;
-                                    default:
-                                      break;
+                                  addTank(
+                                    newIndex,
+                                    getColour(newIndex),
+                                    myData.tankValues[newIndex - 1],
+                                  );
+                                } else if (newIndex >
+                                    myData.tankValues.length) {
+                                  int val = newIndex - myData.tankValues.length;
+                                  final updatedTankValues = [
+                                    ...myData.tankValues,
+                                    ...List.filled(val, 0.0)
+                                  ];
+
+                                  setState(() {
+                                    myData.updateTankValues(updatedTankValues);
+                                  });
+                                  addTank(
+                                    newIndex,
+                                    getColour(newIndex),
+                                    myData.tankValues[newIndex - 1],
+                                  );
+                                  if (kDebugMode) {
+                                    print(myData.tankValues);
                                   }
+                                }
+                                if (myData.tankValues.length == newIndex) {
+                                  addTank(
+                                    newIndex,
+                                    getColour(newIndex),
+                                    myData.tankValues[newIndex - 1],
+                                  );
                                 }
                               },
                               iconSize: 200,
@@ -170,32 +153,30 @@ class _TanksArrangementState extends State<TanksArrangement> {
   }
 }
 
-
-  // else if (myData.TankValues.length < newIndex){ 
-  //             //check if value available for tanks is lower than available tanks required. fill up the values with zeros
-  //                num val = newIndex - myData.TankValues.length;
-  //                List <double> val_ = [for(var i = 0; i < val; i++) 0.0];
-  //                List <double> placeholder = myData.TankValues;
-  //                placeholder.addAll(val_);
-  //                myData.updateTankValues(placeholder);
-  //                myData.TankValues.length = placeholder.length;
-  //           }
-  //           else if (myData.TankValues.length == newIndex){ 
-  //              addTank( 
-  //                     newIndex,
-  //                     LiquidProgress(value: myData.TankValues[newIndex], direction: Axis.vertical),
-  //                     getColour(newIndex),
-  //                   );
-  //           }
-  //           else if (myData.TankValues.length > newIndex){
-  //             num val = myData.TankValues.length - newIndex;
-  //             for(var i = 0; i < val; i++ ){
-  //             addTank(
-  //                     newIndex,
-  //                     LiquidProgress(value: myData.TankValues[newIndex], direction: Axis.vertical),
-  //                     getColour(newIndex),
-  //                   );
-  //                   newIndex++;
-  //             }
-  //           } 
-
+// else if (myData.TankValues.length < newIndex){
+//             //check if value available for tanks is lower than available tanks required. fill up the values with zeros
+//                num val = newIndex - myData.TankValues.length;
+//                List <double> val_ = [for(var i = 0; i < val; i++) 0.0];
+//                List <double> placeholder = myData.TankValues;
+//                placeholder.addAll(val_);
+//                myData.updateTankValues(placeholder);
+//                myData.TankValues.length = placeholder.length;
+//           }
+//           else if (myData.TankValues.length == newIndex){
+//              addTank(
+//                     newIndex,
+//                     LiquidProgress(value: myData.TankValues[newIndex], direction: Axis.vertical),
+//                     getColour(newIndex),
+//                   );
+//           }
+//           else if (myData.TankValues.length > newIndex){
+//             num val = myData.TankValues.length - newIndex;
+//             for(var i = 0; i < val; i++ ){
+//             addTank(
+//                     newIndex,
+//                     LiquidProgress(value: myData.TankValues[newIndex], direction: Axis.vertical),
+//                     getColour(newIndex),
+//                   );
+//                   newIndex++;
+//             }
+//           }
