@@ -153,6 +153,49 @@ class _MyButtonState extends State<MyButton> {
             ],
           ),
         );
+      },
+      'null': () {
+        return ElevatedButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Center(
+                  child: AlertDialog(
+                    content: const Text('Connect to an active network'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          style: const ButtonStyle(
+              fixedSize: MaterialStatePropertyAll(Size.fromRadius(100)),
+              backgroundColor: MaterialStatePropertyAll(Colors.grey),
+              elevation: MaterialStatePropertyAll(50),
+              shape: MaterialStatePropertyAll(CircleBorder(
+                  side: BorderSide(
+                width: 10.0,
+                color: Colors.white60,
+              )))),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                FontAwesomeIcons.gasPump,
+                size: BorderSide.strokeAlignInside,
+                color: Colors.white60,
+              ),
+            ],
+          ),
+        );
       }
     };
 
