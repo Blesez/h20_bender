@@ -102,6 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
               ),
               MyButton(channel: widget.channel),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
@@ -131,7 +134,7 @@ class _MyButtonState extends State<MyButton> {
   @override
   void initState() {
     super.initState();
-    myData = MyData(numOfTank: 0, tankValues: List.empty(), pumpState: '');
+    myData = MyData(numOfTank: 2, tankValues: List.empty(), pumpState: 'off');
   }
 
   bool isButtonClicked = false;
@@ -291,7 +294,12 @@ class _MyButtonState extends State<MyButton> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            return const CircularProgressIndicator();
+            return ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.grey[800])),
+              onPressed: () {},
+              child: Text("unknown state"),
+            );
           }
         });
   }

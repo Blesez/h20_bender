@@ -48,8 +48,9 @@ class _TankModelState extends State<TankModel> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    tankSize(Tank_index: widget.index),
+                                builder: (context) => tankSize(
+                                    channel: widget.channel,
+                                    Tank_index: widget.index),
                               ));
                         },
                       ),

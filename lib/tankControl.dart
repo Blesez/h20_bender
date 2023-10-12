@@ -3,9 +3,9 @@
 import 'dart:async';
 
 class MyData {
-  int numOfTank = 0;
+  int numOfTank = 2;
   List<double> tankValues = [];
-  String pumpState = '';
+  String pumpState = 'off';
 
   final StreamController<MyData> _controller =
       StreamController<MyData>.broadcast();

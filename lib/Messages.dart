@@ -22,7 +22,7 @@ class _MessagesState extends State<Messages> {
   @override
   void initState() {
     super.initState();
-    myData = MyData(numOfTank: 0, tankValues: List.empty(), pumpState: '');
+    myData = MyData(numOfTank: 2, tankValues: List.empty(), pumpState: 'off');
     _streamController = StreamController<MyData>.broadcast();
     widget.channel.on('sendToApp', (data) {
       try {
