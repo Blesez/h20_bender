@@ -8,7 +8,7 @@ var url = 'wss://72daer0qkc.execute-api.us-east-1.amazonaws.com/beta?token:App';
 enum TankShape { Cylinderical, Box }
 
 class tankSize extends StatefulWidget {
-  final channel;
+  final IO.Socket channel;
   final int Tank_index;
 
   const tankSize({required this.channel, required this.Tank_index, super.key});

@@ -168,7 +168,7 @@ class _MyButtonState extends State<MyButton> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   ),

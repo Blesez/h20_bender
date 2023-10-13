@@ -24,7 +24,7 @@ class _MessagesState extends State<Messages> {
     super.initState();
     myData = MyData(numOfTank: 2, tankValues: List.empty(), pumpState: 'off');
     _streamController = StreamController<MyData>.broadcast();
-    widget.channel.on('sendToApp', (data) {
+    widget.channel.on('message', (data) {
       try {
         final message = jsonDecode(data);
         final List<double> tankValues = List<double>.from(message['val']);
